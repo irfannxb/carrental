@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
-import { car_interface } from "../lib/car";
-
+import { car_interface, cars } from "../lib/car";
 
 interface CarFiltersProps {
   onChangeFilters: (filters: car_interface[]) => void;
@@ -9,7 +8,9 @@ interface CarFiltersProps {
 }
 
 const CarFilters = ({ onChangeFilters, cars }: CarFiltersProps) => {
-  const [price, setPrice] = useState<number[]>([5000]);
+  const defaultPrice = 5000;
+  const [price, setPrice] = useState<number[]>([defaultPrice]);
+  const [priceUsed, setPriceUsed] = useState(false);
   const [transmission, setTransmission] = useState("");
   const [fuel, setFuel] = useState("");
   const [doors, setDoors] = useState("");
@@ -17,10 +18,25 @@ const CarFilters = ({ onChangeFilters, cars }: CarFiltersProps) => {
   const [available, setAvailable] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
 
+  const anyFilterUsed =
+    priceUsed ||
+    transmission ||
+    fuel ||
+    doors ||
+    type ||
+    available ||
+    unavailable;
+
   // Run filter on every change
   useEffect(() => {
+    if (!anyFilterUsed) {
+      console.log("No filter applied, returning all cars", cars);
+      onChangeFilters(cars);
+      return;
+    }
+
     const filtered = cars.filter((car) => {
-      if (car.price > price[0]) return false;
+      if (priceUsed && car.price > price[0]) return false;
       if (transmission && car.transmission !== transmission) return false;
       if (fuel && car.fuel !== fuel) return false;
       if (doors && String(car.doors) !== doors) return false;
@@ -31,12 +47,21 @@ const CarFilters = ({ onChangeFilters, cars }: CarFiltersProps) => {
     });
 
     onChangeFilters(filtered);
-  }, [price, transmission, fuel, doors, type, available, unavailable, cars]);
+  }, [
+    price,
+    priceUsed,
+    transmission,
+    fuel,
+    doors,
+    type,
+    available,
+    unavailable,
+    cars,
+  ]);
 
   return (
     <div className="container mx-auto mb-10 p-6 bg-gray-100 rounded-lg shadow-lg">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
         {/* Price Filter */}
         <div className="flex flex-col">
           <label className="mb-1 font-medium">Max Price</label>
@@ -45,7 +70,10 @@ const CarFilters = ({ onChangeFilters, cars }: CarFiltersProps) => {
             value={price}
             max={5000}
             step={500}
-            onValueChange={(val) => setPrice(val)}
+            onValueChange={(val) => {
+              setPrice(val);
+              setPriceUsed(true);
+            }}
           />
 
           <div className="flex items-center justify-between mt-2">
@@ -141,7 +169,6 @@ const CarFilters = ({ onChangeFilters, cars }: CarFiltersProps) => {
             </label>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -1,10 +1,14 @@
-import React from 'react'
-import Banner from '../../../components/Banner'
+import React from "react";
+import Banner from "../../../components/Banner";
+import Testimonials from "../../../components/Testimonials";
 
 const TestimonialsPage = () => {
   return (
-    <Banner />
-  )
-}
+    <>
+      <Banner />
+      <Testimonials />
+    </>
+  );
+};
 
-export default TestimonialsPage
+export default TestimonialsPage;

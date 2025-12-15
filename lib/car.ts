@@ -1,7 +1,7 @@
 export const cars = [
     {
         id: 1,
-        name: "Mitsubishi Pajero",
+        name: "Mitsubishi Pajero A",
         image: "/images/car_1.jpg",
         price: 3200,
         type: "suv",
@@ -14,7 +14,7 @@ export const cars = [
     },
     {
         id: 2,
-        name: "Nissan Moco",
+        name: "Nissan Moco B",
         image: "/images/car_2.jpg",
         price: 1800,
         type: "hatchback",
@@ -27,7 +27,7 @@ export const cars = [
     },
     {
         id: 3,
-        name: "Honda Fitta",
+        name: "Honda Fitta C",
         image: "/images/car_3.jpg",
         price: 1500,
         type: "sedan",
@@ -40,7 +40,7 @@ export const cars = [
     },
     {
         id: 4,
-        name: "Skoda Laura",
+        name: "Skoda Laura D",
         image: "/images/car_4.jpg",
         price: 2200,
         type: "sedan",
@@ -53,7 +53,7 @@ export const cars = [
     },
     {
         id: 5,
-        name: "Mazda LaPuta",
+        name: "Mazda LaPuta E",
         image: "/images/car_5.jpg",
         price: 2700,
         type: "coupe",
@@ -66,7 +66,7 @@ export const cars = [
     },
     {
         id: 6,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse F",
         image: "/images/car_6.jpg",
         price: 3500,
         type: "sedan",
@@ -79,7 +79,7 @@ export const cars = [
     },
     {
         id: 7,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse G",
         image: "/images/car_7.jpg",
         price: 4100,
         type: "suv",
@@ -92,7 +92,7 @@ export const cars = [
     },
     {
         id: 8,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse H",
         image: "/images/car_1.jpg",
         price: 2000,
         type: "hatchback",
@@ -105,7 +105,7 @@ export const cars = [
     },
     {
         id: 9,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse I",
         image: "/images/car_2.jpg",
         price: 1700,
         type: "sedan",
@@ -118,7 +118,7 @@ export const cars = [
     },
     {
         id: 10,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse J",
         image: "/images/car_3.jpg",
         price: 4200,
         type: "coupe",
@@ -131,7 +131,7 @@ export const cars = [
     },
     {
         id: 11,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse K",
         image: "/images/car_4.jpg",
         price: 2600,
         type: "suv",
@@ -144,7 +144,7 @@ export const cars = [
     },
     {
         id: 12,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse L",
         image: "/images/car_5.jpg",
         price: 3300,
         type: "sedan",
@@ -157,7 +157,7 @@ export const cars = [
     },
     {
         id: 13,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse M",
         image: "/images/car_6.jpg",
         price: 4900,
         type: "coupe",
@@ -170,7 +170,7 @@ export const cars = [
     },
     {
         id: 14,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse N",
         image: "/images/car_7.jpg",
         price: 1300,
         type: "hatchback",
@@ -183,15 +183,15 @@ export const cars = [
     },
     {
         id: 15,
-        name: "Buick LaCrosse",
+        name: "Buick LaCrosse O",
         image: "/images/car_2.jpg",
-        price: 3900,
+        price: 5000,
         type: "suv",
         doors: 6,
         passengers: 7,
-        transmission: "manual",
-        fuel: "hybrid",
-        year: 2022,
+        transmission: "automatic",
+        fuel: "petrol",
+        year: 2025,
         available: false,
     },
 ];

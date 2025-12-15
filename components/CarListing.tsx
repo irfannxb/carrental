@@ -14,6 +14,11 @@ const CarListing = () => {
   const pathname = usePathname();
   const [allCars, setAllCars] = useState<car_interface[]>(cars);
   const [loading, setLoading] = useState(false);
+
+  // Pagination
+  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const UpdateCarListing = (filters: car_interface[]) => {
     setLoading(false);
     const timer = setTimeout(() => {
@@ -25,11 +30,18 @@ const CarListing = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      const filteredCars = cars.filter((car) => car.available);
+      const filteredCars = allCars;
       setAllCars(filteredCars);
       setLoading(true);
     }, 1000);
   }, []);
+
+  // Pagination slice
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentCars = allCars.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(allCars.length / itemsPerPage);
 
   return (
     <div className="site-section bg-light">
@@ -58,7 +70,8 @@ const CarListing = () => {
         <div className="row">
           {loading ? (
             allCars
-              .sort((a, b) => a.price - b.price)
+              // .sort((a, b) => a.price - b.price)
+              .slice(indexOfFirstItem, indexOfLastItem)
               .map((car) => (
                 <Link
                   href={`/listing/${car.id}`}
@@ -79,6 +92,31 @@ const CarListing = () => {
                   Loading...
                 </span>
               </div>
+            </div>
+          )}
+
+          {/* Pagination only on listing page */}
+          {pathname === "/listing" && (
+            <div className="col-md-12 flex justify-center mt-6 gap-4">
+              <Button
+                variant="outline"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+              >
+                Previous
+              </Button>
+
+              <span className="font-semibold">
+                Page {currentPage} / {totalPages}
+              </span>
+
+              <Button
+                variant="outline"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              >
+                Next
+              </Button>
             </div>
           )}
 

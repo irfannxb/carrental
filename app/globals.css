@@ -1727,7 +1727,7 @@ h1, h2, h3, h4, h5,
     background: #0779e4;
     color: #fff;
     position: relative; }
-    .social li a > span {
+    .social li a > svg {
       display: inline-block;
       position: absolute;
       top: 50%;
@@ -1877,3 +1877,4 @@ h1, h2, h3, h4, h5,
   body {
     @apply bg-background text-foreground; } }
 
+    ul.list-unstyled.social li { margin-right:8px; }
