@@ -69,6 +69,7 @@ const TripForm = () => {
             <option value="">Select Transmission</option>
             <option value="manual">Manual</option>
             <option value="automatic">Automatic</option>
+            <option value="semi-automatic">Semi-Automatic</option>
           </select>
         </div>
         <div className="mb-3 mb-md-0 col-md-3">

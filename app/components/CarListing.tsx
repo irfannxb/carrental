@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
-import { cars, car_interface } from "../../lib/car";
-import Car from "./ui/car";
+import { car_interface } from "../../lib/car";
+import CarLayout from "./ui/car";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import CarFilters from "./CarFilters";
 import { useEffect } from "react";
 
-const CarListing = () => {
+const CarListing = ({ cars }: { cars: car_interface[] }) => {
   const pathname = usePathname();
   const [allCars, setAllCars] = useState<car_interface[]>(cars);
   const [loading, setLoading] = useState(false);
@@ -33,6 +33,7 @@ const CarListing = () => {
       const filteredCars = allCars;
       setAllCars(filteredCars);
       setLoading(true);
+      console.log(cars);
     }, 1000);
   }, []);
 
@@ -48,7 +49,7 @@ const CarListing = () => {
       {pathname === "/" ? (
         <></>
       ) : (
-        <CarFilters cars={cars} onChangeFilters={UpdateCarListing} />
+        <CarFilters cars={allCars} onChangeFilters={UpdateCarListing} />
       )}
 
       <div className="container">
@@ -66,70 +67,6 @@ const CarListing = () => {
         ) : (
           <></>
         )}
-
-        <div className="row">
-          {loading ? (
-            allCars
-              // .sort((a, b) => a.price - b.price)
-              .slice(indexOfFirstItem, indexOfLastItem)
-              .map((car) => (
-                <Link
-                  href={`/listing/${car.id}`}
-                  key={car.id}
-                  className="col-md-6 col-lg-4 mb-4"
-                >
-                  <Car key={car.id} carobj={car} />
-                </Link>
-              ))
-          ) : (
-            <div className="flex justify-center items-center h-screen">
-              <div className="flex flex-col items-center gap-4">
-                {/* Spinner */}
-                <div className="h-10 w-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-
-                {/* Text */}
-                <span className="text-gray-600 text-lg font-medium">
-                  Loading...
-                </span>
-              </div>
-            </div>
-          )}
-
-          {/* Pagination only on listing page */}
-          {pathname === "/listing" && (
-            <div className="col-md-12 flex justify-center mt-6 gap-4">
-              <Button
-                variant="outline"
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage((prev) => prev - 1)}
-              >
-                Previous
-              </Button>
-
-              <span className="font-semibold">
-                Page {currentPage} / {totalPages}
-              </span>
-
-              <Button
-                variant="outline"
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage((prev) => prev + 1)}
-              >
-                Next
-              </Button>
-            </div>
-          )}
-
-          {pathname === "/" ? (
-            <div className="col-md-12 text-center">
-              <Link href="/listing">
-                <Button variant="outline">View All Cars</Button>
-              </Link>
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
       </div>
     </div>
   );

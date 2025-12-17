@@ -1,7 +1,7 @@
 import { car_interface } from "@/lib/car";
 import React from "react";
 
-const Car = ({ carobj }: { carobj: car_interface }) => {
+const CarLayout = ({ carobj }: { carobj: car_interface }) => {
   return (
     <div className="listing d-block  align-items-stretch" key={carobj.id}>
       <div className="listing-img h-100 mr-4">
@@ -61,4 +61,4 @@ const Car = ({ carobj }: { carobj: car_interface }) => {
   );
 };
 
-export default Car;
+export default CarLayout;

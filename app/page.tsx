@@ -1,9 +1,20 @@
+"use client";
 import HeroSlider from "./components/HeroSlider";
-import CarListing from "./components/CarListing";
+import CarListingComponent from "./components/ui/carlisting";
 import Testimonials from "./components/Testimonials";
 import Image from "next/image";
 import Link from "next/link";
-const page = () => {
+import { useEffect } from "react";
+import { fetchCars } from "@/lib/features/Cars/CarSlice";
+import { useAppDispatch } from "@/lib/hooks";
+import { useCars } from "@/lib/getcars";
+
+const Page = () => {
+  const dispatch = useAppDispatch();
+  const { cars, loading } = useCars();
+  useEffect(() => {
+    dispatch(fetchCars());
+  }, [dispatch]);
   return (
     <>
       <HeroSlider />
@@ -93,10 +104,10 @@ const page = () => {
           </div>
         </div>
       </div>
-      <CarListing />
+      <CarListingComponent limit={6} cars={cars} loading={loading} />
       <Testimonials />
     </>
   );
 };
 
-export default page;
+export default Page;

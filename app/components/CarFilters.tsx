@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Slider } from "@/app/components/ui/slider";
-import { car_interface, cars } from "../../lib/car";
+import { car_interface } from "../../lib/car";
 
 interface CarFiltersProps {
   onChangeFilters: (filters: car_interface[]) => void;
@@ -94,6 +94,7 @@ const CarFilters = ({ onChangeFilters, cars }: CarFiltersProps) => {
             <option value="">Select</option>
             <option value="automatic">Automatic</option>
             <option value="manual">Manual</option>
+            <option value="semi-automatic">Semi-Automatic</option>
           </select>
         </div>
 
