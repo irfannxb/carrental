@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { testimonials } from "../lib/testimonials";
-import { testimonial_interface } from "../lib/testimonials";
+import { testimonials } from "../../lib/testimonials";
+import { testimonial_interface } from "../../lib/testimonials";
 import { Pathname, usePathname } from "next/navigation";
 import Image from "next/image";
 import {
@@ -32,7 +32,7 @@ const Testimonials = () => {
             <>
               {testimonials.map((testimonial: testimonial_interface) => (
                 <>
-                  <div className="col-lg-4 mb-4">
+                  <div className="col-lg-4 mb-4" key={testimonial.id}>
                     <div className="testimonial-2">
                       <blockquote className="mb-4">
                         <p>{testimonial.description}</p>

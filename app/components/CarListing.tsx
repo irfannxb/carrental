@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
-import { cars, car_interface } from "../lib/car";
+import { cars, car_interface } from "../../lib/car";
 import Car from "./ui/car";
 import { usePathname } from "next/navigation";
 import { useState } from "react";

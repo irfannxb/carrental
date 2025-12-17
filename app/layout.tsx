@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-
-import 'aos/dist/aos.css'; 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { ReduxProvider } from "../lib/ReduxProvider";
+import "aos/dist/aos.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./globals.css";
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from "../app/components/Header";
+import Footer from "../app/components/Footer";
 
-import './style.css';
+import "./style.css";
 
 export const metadata: Metadata = {
   title: "Car Rental System",
@@ -21,12 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="">
-          <div className="site-wrap" id="home-section">
-            <Header />
-            {children}
-            <Footer />
+      <body className="">
+        <div className="site-wrap" id="home-section">
+          <ReduxProvider>
+            <>
+              <Header />
+              {children}
+              <Footer />
+            </>
+          </ReduxProvider>
         </div>
       </body>
     </html>

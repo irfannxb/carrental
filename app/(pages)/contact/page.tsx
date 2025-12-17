@@ -1,8 +1,6 @@
-import Banner from '../../../components/Banner'
+import Banner from "../../components/Banner";
 const ContactPage = () => {
-  return (
-    <Banner />
-  )
-}
+  return <Banner />;
+};
 
-export default ContactPage
+export default ContactPage;

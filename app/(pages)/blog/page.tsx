@@ -1,9 +1,7 @@
-import React from 'react'
-import Banner from '../../../components/Banner'
+import React from "react";
+import Banner from "../../components/Banner";
 const BlogPage = () => {
-  return (
-    <Banner />
-  )
-}
+  return <Banner />;
+};
 
-export default BlogPage
+export default BlogPage;

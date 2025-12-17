@@ -1,7 +1,6 @@
 import React from "react";
-import Banner from "../../../components/Banner";
-import Testimonials from "../../../components/Testimonials";
-
+import Banner from "@/app/components/Banner";
+import Testimonials from "@/app/components/Testimonials";
 const TestimonialsPage = () => {
   return (
     <>

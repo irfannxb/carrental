@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Slider } from "@/components/ui/slider";
-import { car_interface, cars } from "../lib/car";
+import { Slider } from "@/app/components/ui/slider";
+import { car_interface, cars } from "../../lib/car";
 
 interface CarFiltersProps {
   onChangeFilters: (filters: car_interface[]) => void;
