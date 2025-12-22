@@ -2,7 +2,11 @@ import React from "react";
 import Banner from "../../components/Banner";
 import Image from "next/image";
 import { team, team_interface } from "../../../lib/team";
-const AboutPage = () => {
+import { getServerSession } from "next-auth";
+import { GET as authHandler } from "../../api/auth/[...nextauth]/route";
+const AboutPage = async () => {
+  const session = await getServerSession(authHandler);
+  console.log(session);
   return (
     <>
       <Banner />

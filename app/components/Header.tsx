@@ -37,11 +37,10 @@ const Header = () => {
       href: "/contact",
       id: "contact",
     },
-
     {
-      label: "Logout",
-      href: "/logout",
-      id: "logout",
+      label: "Dashboard",
+      href: "/dashboard",
+      id: "dashboard",
     },
   ];
 
