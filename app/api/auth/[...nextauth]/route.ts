@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { UserType } from "../../../../next-auth-d";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -9,7 +10,7 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials): Promise<{ id: string; accessToken: string; refreshToken: string; user_id: number; username: string } | null> {
+      async authorize(credentials): Promise<UserType | null> {
         const res = await fetch(
           `${process.env.DJANGO_API_URL}/api/token/`,
           {
@@ -48,7 +49,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        const u = user as unknown as { accessToken: string; refreshToken: string; user_id: number; username: string };
+        const u = user as UserType;
         token.accessToken = u.accessToken;
         token.refreshToken = u.refreshToken;
         token.user_id = u.user_id;
@@ -58,10 +59,10 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      if(session.user) {
-      session.accessToken = token.accessToken as string;
-      session.user_id = token.user_id as string;
-      session.username = token.username as string;
+      if (session.user) {
+        session.accessToken = token.accessToken as string;
+        session.user_id = token.user_id as number;
+        session.username = token.username as string;
       }
       return session;
     },

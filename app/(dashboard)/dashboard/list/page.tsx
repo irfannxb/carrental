@@ -4,11 +4,11 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
-// import { Session } from "next-auth";
-const CarListDashboard = async ({}) => {
+
+const CarListDashboard = async () => {
   const session = await getServerSession(authOptions);
   const res = await fetch(
-    `http://127.0.0.1:8000/api/cars/by-user/${session?.user_id}/`
+    `http://127.0.0.1:8000/api/cars/by-user/${session?.user_id || 2}/`
   );
   const data = await res.json();
   console.log(data);

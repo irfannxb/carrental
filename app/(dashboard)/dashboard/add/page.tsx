@@ -48,8 +48,13 @@ const AddVehicle = () => {
     data.append("year", formData.year);
     data.append("doors", formData.doors.toString());
     data.append("passengers", formData.passengers.toString());
-    if(user) {
-    data.append("user", user?.user_id as string);
+
+    if (!user) {
+      toast.error("You must be logged in to add a vehicle");
+      setLoading(false);
+      return;
+    }
+    data.append("user", String(user.user_id || 2));
     if (image) {
       data.append("image", image);
     }
