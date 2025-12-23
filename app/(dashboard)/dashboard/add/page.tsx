@@ -48,7 +48,8 @@ const AddVehicle = () => {
     data.append("year", formData.year);
     data.append("doors", formData.doors.toString());
     data.append("passengers", formData.passengers.toString());
-    data.append("user", user.user_id);
+    if(user) {
+    data.append("user", user?.user_id as string);
     if (image) {
       data.append("image", image);
     }
