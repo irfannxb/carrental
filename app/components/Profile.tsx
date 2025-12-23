@@ -1,15 +1,17 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
 
 const Profile = async () => {
   const session = await getServerSession(authOptions);
+
   if (!session) {
-    redirect("/");
+    return null;
   }
+
   return (
-    <div>
-      <h1>{session?.user?.name}</h1>
+    <div className="p-4 border-b border-gray-800 mb-4">
+      <p className="text-sm text-gray-400">Logged in as</p>
+      <p className="text-lg font-semibold">{session.username}</p>
     </div>
   );
 };

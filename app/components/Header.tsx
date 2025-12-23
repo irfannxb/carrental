@@ -85,7 +85,7 @@ const Header = () => {
                         className={` ${
                           pathname === link.href
                             ? "text-blue-500 dark:text-blue-500 active"
-                            : "hover:text-blue-500 dark:hover:text-blue-500 transition-colors duration-300"
+                            : "hover:text-blue-500 dark:hover:text-blue-500 transition-colors duration-300 text-black"
                         }`}
                       >
                         {link.label}

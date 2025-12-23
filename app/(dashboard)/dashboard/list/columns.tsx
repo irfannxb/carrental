@@ -5,7 +5,6 @@ import Image from "next/image";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Car = {
-  id: string;
   name: string;
   image: string;
   price: number;
@@ -18,10 +17,6 @@ export type Car = {
 };
 
 export const columns: ColumnDef<Car>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-  },
   {
     accessorKey: "image_url",
     header: "Image",

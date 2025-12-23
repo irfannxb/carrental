@@ -1,4 +1,5 @@
 "use client";
+import { getSession } from "next-auth/react";
 import React from "react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,9 +14,10 @@ const AddVehicle = () => {
     transmission: "",
     fuel: "",
     year: "",
-    image: "",
+    image: null,
   });
   const [image, setImage] = useState<File | null>(null);
+  const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
@@ -25,14 +27,17 @@ const AddVehicle = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files[0]) {
+      console.log("IMAGE FILE:", e.target.files[0]);
       setImage(e.target.files[0]);
+      setFileName(e.target.files[0].name);
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    const user = await getSession();
 
     const data = new FormData();
     data.append("name", formData.name);
@@ -43,7 +48,10 @@ const AddVehicle = () => {
     data.append("year", formData.year);
     data.append("doors", formData.doors.toString());
     data.append("passengers", formData.passengers.toString());
-    data.append("image", image as Blob);
+    data.append("user", user.user_id);
+    if (image) {
+      data.append("image", image);
+    }
 
     try {
       const res = await fetch(
@@ -51,11 +59,6 @@ const AddVehicle = () => {
         {
           method: "POST",
           body: data,
-          // headers: {
-          //   Authorization: `Bearer ${
-          //     localStorage.getItem("accessToken") || ""
-          //   }`,
-          // },
         }
       );
 
@@ -66,11 +69,18 @@ const AddVehicle = () => {
       if (!res.ok) {
         throw new Error("Failed to create car");
       }
-
-      toast.success("Car created successfully!");
+      toast.success("Car created successfully!", {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: false,
+      });
     } catch (error) {
       console.error(error);
-      toast.error("Error creating car");
+      toast.error("Error creating car", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+      });
     } finally {
       setLoading(false);
     }
@@ -87,6 +97,7 @@ const AddVehicle = () => {
         <form
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
           onSubmit={handleSubmit}
+          encType="multipart/form-data"
         >
           {/* Vehicle Name */}
           <div>
@@ -100,6 +111,7 @@ const AddVehicle = () => {
               className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
               onChange={handleChange}
               name="name"
+              required
             />
           </div>
 
@@ -115,6 +127,7 @@ const AddVehicle = () => {
               className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
               onChange={handleChange}
               name="price"
+              required
             />
           </div>
 
@@ -128,6 +141,7 @@ const AddVehicle = () => {
               onChange={handleChange}
               name="type"
               value={formData.type}
+              required
             >
               <option>Select body type</option>
               <option value="sedan">Sedan</option>
@@ -147,6 +161,7 @@ const AddVehicle = () => {
               onChange={handleChange}
               name="doors"
               value={formData.doors}
+              required
             >
               <option>Select number of doors</option>
               <option value="4">4 Doors</option>
@@ -164,6 +179,7 @@ const AddVehicle = () => {
               onChange={handleChange}
               name="passengers"
               value={formData.passengers}
+              required
             >
               <option>Select number of passengers</option>
               <option value="2">2 Passengers</option>
@@ -183,6 +199,7 @@ const AddVehicle = () => {
               onChange={handleChange}
               name="transmission"
               value={formData.transmission}
+              required
             >
               <option>Select transmission</option>
               <option value="manual">Manual</option>
@@ -201,6 +218,7 @@ const AddVehicle = () => {
               onChange={handleChange}
               name="fuel"
               value={formData.fuel}
+              required
             >
               <option value="">Select fuel type</option>
               <option value="petrol">Petrol</option>
@@ -220,6 +238,7 @@ const AddVehicle = () => {
               onChange={handleChange}
               name="year"
               value={formData.year}
+              required
             >
               <option value="">Select year</option>
               <option value="2020">2020</option>
@@ -232,21 +251,34 @@ const AddVehicle = () => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Vehicle Image
+          {/* Custom File Upload Button */}
+          <div className="flex items-center space-x-4">
+            <label
+              htmlFor="image-upload"
+              className="cursor-pointer bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+            >
+              {fileName || "Choose an image"}
             </label>
+
+            {/* Hidden file input */}
             <input
               type="file"
-              accept="image/*"
-              onChange={handleImageChange}
+              id="image-upload"
               name="image"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+              required
             />
           </div>
 
           {/* Actions */}
           <div className="md:col-span-2 flex justify-end gap-4">
-            <button type="submit" disabled={loading}>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              disabled={loading}
+            >
               {loading ? "Submitting..." : "Add Vehicle"}
             </button>
           </div>

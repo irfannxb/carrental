@@ -2,7 +2,7 @@
 import React from "react";
 import { testimonials } from "../../lib/testimonials";
 import { testimonial_interface } from "../../lib/testimonials";
-import { Pathname, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import {
   Carousel,
@@ -31,28 +31,26 @@ const Testimonials = () => {
           {pathname === "/testimonials" ? (
             <>
               {testimonials.map((testimonial: testimonial_interface) => (
-                <>
-                  <div className="col-lg-4 mb-4" key={testimonial.id}>
-                    <div className="testimonial-2">
-                      <blockquote className="mb-4">
-                        <p>{testimonial.description}</p>
-                      </blockquote>
-                      <div className="d-flex v-card align-items-center">
-                        <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          width={50}
-                          height={50}
-                          className="img-fluid mr-3"
-                        />
-                        <div className="author-name">
-                          <span className="d-block">{testimonial.name}</span>
-                          <span>{testimonial.job}</span>
-                        </div>
+                <div className="col-lg-4 mb-4" key={testimonial.id}>
+                  <div className="testimonial-2">
+                    <blockquote className="mb-4">
+                      <p>{testimonial.description}</p>
+                    </blockquote>
+                    <div className="d-flex v-card align-items-center">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        width={50}
+                        height={50}
+                        className="img-fluid mr-3"
+                      />
+                      <div className="author-name">
+                        <span className="d-block">{testimonial.name}</span>
+                        <span>{testimonial.job}</span>
                       </div>
                     </div>
                   </div>
-                </>
+                </div>
               ))}
             </>
           ) : (
