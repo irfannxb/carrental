@@ -8,7 +8,9 @@ import { getServerSession } from "next-auth/next";
 const CarListDashboard = async () => {
   const session = await getServerSession(authOptions);
   const res = await fetch(
-    `http://127.0.0.1:8000/api/cars/by-user/${session?.user_id || 2}/`
+    `${process.env.NEXT_PUBLIC_DJANGO_API_URL}/api/cars/by-user/${
+      session?.user_id || 2
+    }/`
   );
   const data = await res.json();
   console.log(data);
