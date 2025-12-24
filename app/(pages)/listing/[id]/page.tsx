@@ -16,7 +16,9 @@ const SingleCar = () => {
     const fetchCar = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://127.0.0.1:8000/api/cars/${id}/`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_DJANGO_API_URL}/api/cars/${id}/`
+        );
 
         if (!res.ok) {
           throw new Error("Failed to fetch car");
