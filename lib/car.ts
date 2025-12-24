@@ -194,7 +194,7 @@ export const cars = [
         year: 2025,
         available: false,
     },
-];
+]
 
 export interface car_interface {
     id: number;

@@ -2,7 +2,6 @@ import { car_interface } from "@/lib/car";
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SerializedError } from "@reduxjs/toolkit";
 interface CarState {
     cars: car_interface[];
     loading: boolean;

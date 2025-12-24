@@ -1,7 +1,6 @@
 import CarLayout from "./car";
 import Link from "next/link";
 import { car_interface } from "@/lib/car";
-import { useState } from "react";
 
 const CarListingComponent = ({
   cars,
@@ -14,7 +13,7 @@ const CarListingComponent = ({
 }) => {
   const sortedCars =
     limit === -1
-      ? [...cars]
+      ? [...cars].reverse()
       : [...cars].sort((a, b) => a.price - b.price).slice(0, limit);
 
   return (

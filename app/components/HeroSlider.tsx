@@ -1,5 +1,6 @@
 import React from "react";
 import TripForm from "./TripForm";
+import Link from "next/link";
 
 const HeroSlider = () => {
   return (
@@ -17,7 +18,15 @@ const HeroSlider = () => {
                 </h1>
               </div>
             </div>
-            <TripForm />
+            <div className="row mb-5">
+              <div className="col-lg-5">
+                <button className="btn btn-primary">
+                  <Link href="/listing" className="text-white">
+                    View All Cars
+                  </Link>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

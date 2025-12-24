@@ -10,12 +10,13 @@ import Link from "next/link";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setLoading(true);
     const res = await signIn("credentials", {
       username,
       password,
@@ -25,19 +26,25 @@ export default function LoginPage() {
     if (!res?.error) {
       toast.success("Login successful! Redirecting...", {
         position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
+        autoClose: 500,
       });
       setTimeout(() => {
         router.push("/dashboard");
-      }, 2000);
+      }, 500);
     } else {
       if (res?.error === "CredentialsSignin") {
-        toast.error("Invalid email or password");
+        toast.error("Invalid email or password", {
+          autoClose: 500,
+          position: "top-right",
+        });
       } else {
-        toast.error(res?.error as string);
+        toast.error(res?.error as string, {
+          autoClose: 500,
+          position: "top-right",
+        });
       }
     }
+    setLoading(false);
   };
 
   return (
@@ -114,8 +121,9 @@ export default function LoginPage() {
               type="submit"
               className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-medium text-white
                    hover:bg-blue-700 active:scale-[0.98] transition"
+              disabled={loading}
             >
-              Sign In
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
 
