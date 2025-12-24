@@ -86,6 +86,7 @@ export default function LoginPage() {
                      transition"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                required
               />
             </div>
 
@@ -101,6 +102,7 @@ export default function LoginPage() {
                      transition"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
 
