@@ -23,7 +23,7 @@ const Page = () => {
           <h2 className="section-heading">
             <strong>How it works?</strong>
           </h2>
-          <p className="mb-5">Easy steps to get you started</p>
+          <p className="mb-5">Easy steps to get you started ....</p>
 
           <div className="row mb-5">
             <div className="col-lg-4 mb-4 mb-lg-0">
