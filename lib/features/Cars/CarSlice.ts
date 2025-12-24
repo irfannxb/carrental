@@ -16,7 +16,7 @@ const initialState: CarState = {
 }
 
 export const fetchCars = createAsyncThunk('cars/fetchCars', async () => {
-    const response = await fetch('http://127.0.0.1:8000/api/cars/');
+    const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_API_URL}/api/cars/`);
     const data = await response.json();
     return data;
 })
