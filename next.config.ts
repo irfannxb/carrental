@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
         pathname: '/media/**',  // Allow media files
 
       },
+      // production
+      {
+        protocol: "https",
+        hostname: "irfanahmed616.pythonanywhere.com",
+        pathname: "/media/**",
+      },
     ],
   }
   /* config options here */
